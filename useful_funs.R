@@ -199,3 +199,13 @@ heatmapper <- function(gene_list)
   pheatmap(subset_log2[,c(1,3,2,4)], cluster_cols = F, annotation_row = de_mat[,c(4,2,3,1)], display_numbers = T, color = col_pretty(n), breaks = breaks, annotation_colors = ann_colors, show_colnames = T, annotation_names_row = T)
 
 }
+summarise_exp <- function( id_list, expr)
+{
+  require(tidyverse)
+  require(lettercase)
+  id_list <- str_lowercase(id_list)
+  id_list <- str_ucfirst(id_list)
+  todo <- expr[which(expr[,1] %in% id_list),]
+  x <- mean(todo[,2], na.rm = T)
+  return(x)
+}
